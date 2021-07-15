@@ -61,6 +61,7 @@ class uperf_wrapper:
         # number of that pod, useful for displaying throughput of each density
         self.args.pod_id = os.getenv("my_pod_idx", "")
         self.args.prom_es = os.getenv("prom_es", "")
+        self.args.start_port = os.getenv("start_port", "20000")
 
     def run(self):
         uperf_wrapper_obj = Trigger_uperf(self.args)

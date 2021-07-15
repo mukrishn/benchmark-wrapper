@@ -45,6 +45,7 @@ class Trigger_uperf:
         self.node_range = args.node_range
         self.pod_id = args.pod_id
         self.prom_es = args.prom_es
+        self.start_port = args.start_port
 
     def _json_payload(self, results, data, sample):
         processed = []
@@ -97,7 +98,7 @@ class Trigger_uperf:
     def _run_uperf(self):
         # short to long cli option for uperf:
         # verbose, all stats, raw output in ms, throughput collection interval is 1 second
-        cmd = "uperf -v -a -R -i 1 -m {}".format(self.workload)
+        cmd = "uperf -v -a -R -i 1 -m {} -P {}".format(self.workload, self.start_port)
         process = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         stdout, stderr = process.communicate()
         return stdout.strip().decode("utf-8"), stderr.strip().decode("utf-8"), process.returncode
