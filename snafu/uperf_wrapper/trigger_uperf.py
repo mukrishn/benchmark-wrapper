@@ -99,6 +99,7 @@ class Trigger_uperf:
         # short to long cli option for uperf:
         # verbose, all stats, raw output in ms, throughput collection interval is 1 second
         cmd = "uperf -v -a -R -i 1 -m {} -P {}".format(self.workload, self.start_port)
+        logger.info("Command ----------- %s" % cmd)
         process = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         stdout, stderr = process.communicate()
         return stdout.strip().decode("utf-8"), stderr.strip().decode("utf-8"), process.returncode
